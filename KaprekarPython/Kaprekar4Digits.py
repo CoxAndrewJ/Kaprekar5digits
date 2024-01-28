@@ -1,9 +1,13 @@
+# A program used to run the Kaprekar Algorithm for four digits, requesting input from the user
+
+# Caveats: Cannot account for a leading 0 yet. Needs to be fixed
 def main():
     user_input = take_input()
     sorted_input_asc = routine_asc(user_input)
-    print(sorted_input_asc)
+    print("Ascending: " + str(sorted_input_asc))
     sorted_input_desc = routine_desc(user_input)
-    print (sorted_input_desc)
+    print ("Descending: " + str(sorted_input_desc))
+    subtract(sorted_input_desc, sorted_input_asc)
 def take_input():
     # Loop until the input is correct
     while True:
@@ -47,7 +51,7 @@ def routine_asc(user_input):
     # Convert the list of characters back to a string
     sorted_string = ''.join(char_list)
 
-    return sorted_string
+    return int(sorted_string)
 
 
     return 0
@@ -78,10 +82,29 @@ def routine_desc(user_input):
     # Convert the list of characters back to a string
     sorted_string = ''.join(char_list)
 
-    return sorted_string
+    return int(sorted_string)
 
 
     return 0
+
+def subtract(desc, asc):
+    constant_check = 0
+    result = -1
+    counter = 1
+    while(constant_check != result):
+        # Set our Constant_check equal to the previous result
+        constant_check = result
+
+        # Find our new result by subracting the descending order from ascending
+        result = desc - asc
+        print("Iteration " + str(counter) + " " + str(result))
+
+        # sort once more
+        desc = routine_desc(result)
+        asc = routine_asc(result)
+
+        # Increment the counter
+        counter += 1
 
 if __name__ == "__main__":
     main()
